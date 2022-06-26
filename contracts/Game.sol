@@ -19,11 +19,13 @@ contract Game {
     State public currentState;
     Board[] public won_games; 
     uint32 public totalStored; 
+    address public owner; 
 
     constructor() {
         // Generate a genesis state
         generateState(msg.sender);
         totalStored = 0; 
+        owner = msg.sender; 
     }
 
     function generateState(address add) private {
@@ -46,8 +48,8 @@ contract Game {
         bool validBoard = checkValidBoard(board);
         require(validBoard, 'Board not valid.');
         // 2) Check that the initial condition is met
-        bool initCondition = checkInitial(board); 
-        require(initCondition, 'Not initial condition');
+        // bool initCondition = checkInitial(board); 
+        // require(initCondition, 'Not initial condition');
         
         /* 
         3) Translate solution to user color scheme 
@@ -62,7 +64,7 @@ contract Game {
         generateState(n);
         totalStored++; 
         won_games.push(won);
-        console.log(n);
+        // console.log(n);
     } 
     function checkValidBoard(int[] memory board) internal pure returns ( bool ) {
 
@@ -85,8 +87,8 @@ contract Game {
     function checkInitial(int[] memory board) internal view returns ( bool ) {
         // Get the quadrant of the 1
         uint8 firstIndex = quadrantLookup(currentState.layoutState, currentState.firstBoxState); 
-        console.log("First index: "); 
-        console.log(firstIndex);
+        // console.log("First index: "); 
+        // console.log(firstIndex);
         int firstValue = board[firstIndex]; 
         if(firstValue == 1) { return true; }
         // TODO: Check the rest...
@@ -121,8 +123,22 @@ contract Game {
         // 2) Have a deterministic function that generates a color for each
     }
 
-    function getGames() public view returns ( uint32 ) {
+    function getGames() public view returns ( uint32 wins ) {
         return totalStored; 
+    }
+
+    function getFinishedGames( ) public view returns ( Board[] memory boards ) {
+
+        return won_games;
+    }
+
+    function update(uint8 firstBoxState, uint8 secondBoxState , uint8 thirdBoxState , uint8 fourthBoxState , uint8 layoutState) public  {
+        require(owner == msg.sender); 
+        currentState.firstBoxState = firstBoxState;
+        currentState.secondBoxState = secondBoxState;
+        currentState.thirdBoxState = thirdBoxState;
+        currentState.fourthBoxState = fourthBoxState; 
+        currentState.layoutState = layoutState; 
     }
 }
 

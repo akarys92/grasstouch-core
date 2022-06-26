@@ -26,5 +26,13 @@ module.exports = {
       url: process.env.ALCHEMY_API_KEY_URL,
       accounts: [process.env.RINKEBY_PRIVATE_KEY],
     },
+    kovan: {
+      url: process.env.kovan_url,
+      accounts: [process.env.RINKEBY_PRIVATE_KEY],
+    },
+    ropsten: {
+      url: process.env.ropsten_url,
+      accounts: [process.env.RINKEBY_PRIVATE_KEY],
+    },
   },
 };

@@ -1,18 +1,15 @@
-const validBoard = [1,5,3,7,3,7,1,5,5,1,7,3,7,3,5,1]; 
+const validBoard = [1,3,7,5,5,7,3,1,3,5,1,7,7,1,5,3];
 const main = async () => {
-    const gameContractFactory = await hre.ethers.getContractFactory('Game');
-    const gameContract = await gameContractFactory.deploy();
-    await gameContract.deployed();
-    console.log("Contract deployed to:", gameContract.address);
+    const Game = await ethers.getContractFactory("Game");
+    const game = await Game.deploy();
+    await game.deployed();
+    console.log("Contract deployed to:", game.address);
 
-    let txn = await gameContract.setInitialState();
-    await txn.wait();
+    let state = await game.getState(); 
+    console.log(state);
 
-    // let state = await gameContract.getInitialState(); 
-    // console.log(state)
-
-    let state = await gameContract.temp(); 
-    console.log(state)
+    let txn = await game.verifySolution(validBoard, {gasLimit: 3000000}); 
+    await txn.wait(); 
 
 };
 

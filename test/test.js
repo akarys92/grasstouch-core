@@ -21,13 +21,13 @@ describe("Game", function () {
     await game.deployed();
 
     let initialState = await game.getState(); 
-    console.log(initialState);
+    // console.log(initialState);
     let txn = await game.verifySolution(validBoard); 
     await txn.wait(); 
 
     let newState = await game.getState(); 
     newState = await game.getState(); 
-    console.log(newState)
+    // console.log(newState)
     expect(initialState).not.equal(newState)
   }); 
 
@@ -41,7 +41,33 @@ describe("Game", function () {
         await txn.wait(); 
     }
     let count = await game.getGames(); 
-    expect(count).equal(10);
+    expect(count).to.equal(10);
   });
+
+  it("Should return the right number of finished games", async function() {
+    const Game = await ethers.getContractFactory("Game");
+    const game = await Game.deploy();
+    await game.deployed();
+    
+    let txn = await game.verifySolution(validBoard); 
+    await txn.wait(); 
+
+    let games = await game.getFinishedGames();
+    // console.log(games.length);
+    expect(games.length).to.equal(1);
+  }); 
+
+  it("Should be able to cheat...", async function() {
+    const Game = await ethers.getContractFactory("Game");
+    const game = await Game.deploy();
+    await game.deployed();
+
+    let initialState = await game.getState(); 
+    console.log(initialState);
+
+    let update = await game.update(0,2,1,3,2); 
+    initialState = await game.getState(); 
+    console.log(initialState);
+  }); 
 
 });
