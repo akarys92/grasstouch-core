@@ -1,0 +1,138 @@
+[
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "currentState",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "firstBoxState",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "secondBoxState",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "thirdBoxState",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "fourthBoxState",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "layoutState",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getGames",
+      "outputs": [
+        {
+          "internalType": "uint32",
+          "name": "",
+          "type": "uint32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getState",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint8",
+              "name": "firstBoxState",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "secondBoxState",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "thirdBoxState",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "fourthBoxState",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "layoutState",
+              "type": "uint8"
+            }
+          ],
+          "internalType": "struct Game.State",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalStored",
+      "outputs": [
+        {
+          "internalType": "uint32",
+          "name": "",
+          "type": "uint32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "int256[]",
+          "name": "board",
+          "type": "int256[]"
+        }
+      ],
+      "name": "verifySolution",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "won_games",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+]
